@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="bootstrap-integration.php" colors="true">
+  <testsuites>
+    <testsuite name="integration">
+      <directory suffix="Test.php">./integration</directory>
+    </testsuite>
+  </testsuites>
+
+  <php>
+    <!-- Use the self-contained core you created -->
+    <env name="WP_CORE_DIR" value="tests/.wp-core"/>
+
+    <!-- Point WP tests to this config (resolved in bootstrap to an absolute path) -->
+    <env name="WP_PHPUNIT__TESTS_CONFIG" value="wp-tests-config.php"/>
+
+    <!-- DB matches your docker compose -->
+    <env name="WP_TEST_DB_NAME" value="wordpress_test"/>
+    <env name="WP_TEST_DB_USER" value="wpuser"/>
+    <env name="WP_TEST_DB_PASS" value="wppass"/>
+    <env name="WP_TEST_DB_HOST" value="iftp-db"/>
+
+    <!-- keep CLI quiet/fast -->
+    <env name="XDEBUG_MODE" value="off"/>
+  </php>
+</phpunit>

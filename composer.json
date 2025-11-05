@@ -1,0 +1,27 @@
+{
+  "require-dev": {
+    "phpunit/phpunit": "^11.2 || ^9.6",
+    "wp-phpunit/wp-phpunit": "^6.8",
+    "yoast/phpunit-polyfills": "^4.0",
+    "brain/monkey": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ifthenpay\\MemberPress\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Ifthenpay\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test:unit": "XDEBUG_MODE=off vendor/bin/phpunit -c tests/phpunit.unit.xml.dist",
+    "test:int": "XDEBUG_MODE=off vendor/bin/phpunit -c tests/phpunit.xml.dist",
+    "test:all": "composer test:unit && composer test:int",
+    "test:unit:pretty": "php -dxdebug.mode=develop -dxdebug.start_with_request=0 -dxdebug.cli_color=1 vendor/bin/phpunit --colors=always --display-warnings --display-deprecations -c tests/phpunit.unit.xml.dist",
+    "test:int:pretty": "php -dxdebug.mode=develop -dxdebug.start_with_request=0 -dxdebug.cli_color=1 vendor/bin/phpunit --colors=always --display-warnings --display-deprecations -c tests/phpunit.xml.dist",
+    "test:unit:dox": "php -dxdebug.mode=develop -dxdebug.start_with_request=0 -dxdebug.cli_color=1 vendor/bin/phpunit --colors=always --testdox -c tests/phpunit.unit.xml.dist",
+    "test:int:dox": "php -dxdebug.mode=develop -dxdebug.start_with_request=0 -dxdebug.cli_color=1 vendor/bin/phpunit --colors=always --testdox -c tests/phpunit.xml.dist"
+  }
+}

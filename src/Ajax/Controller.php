@@ -71,14 +71,14 @@ final class Controller {
 		// Payment method validation
 		$allowed_methods = array( 'MBWAY', 'CCARD', 'GOOGLE', 'APPLE' );
 		if ( ! in_array( $iftp_txn->pay_method, $allowed_methods, true ) ) {
-			   /* translators: %s: The payment method name that does not support refunds. */
-			   wp_send_json_error(
-				   sprintf(
-					   __( 'Refunds are not supported for this payment method: %s.', 'ifthenpay-payments-for-memberpress' ),
-					   $iftp_txn->pay_method
-				   ),
-				   400
-			   );
+				/* translators: %s: The payment method name that does not support refunds. */
+				wp_send_json_error(
+					sprintf(
+						__( 'Refunds are not supported for this payment method: %s.', 'ifthenpay-payments-for-memberpress' ),
+						$iftp_txn->pay_method
+					),
+					400
+				);
 		}
 
 		// Token generation & email sending

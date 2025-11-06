@@ -61,9 +61,6 @@ final class Plugin {
 		// Admin assets for transactions page
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_transactions_assets' ) );
 
-		// i18n
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-
 		// AJAX routes (admin)
 		add_action( 'wp_ajax_iftp_mepr_refund_send_token', array( $this->ajax, 'send_refund_token' ) );
 		add_action( 'wp_ajax_iftp_mepr_refund_verify_token', array( $this->ajax, 'verify_refund_token' ) );
@@ -174,17 +171,6 @@ final class Plugin {
 					'logo' => IFTP_MP_IMAGES_URL . '/ifthenpay_symbol.svg',
 				),
 			)
-		);
-	}
-
-	/**
-	 * Load plugin textdomain for translations.
-	 */
-	public function load_textdomain(): void {
-		load_plugin_textdomain(
-			'ifthenpay-payments-for-memberpress',
-			false,
-			dirname( plugin_basename( IFTP_MP_PATH . '/ifthenpay-payments-for-memberpress.php' ) ) . '/languages'
 		);
 	}
 

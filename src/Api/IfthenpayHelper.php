@@ -59,8 +59,10 @@ final class IfthenpayHelper {
 			'id'              => (string) $txn->trans_num,
 			'amount'          => (string) $txn->amount,
 			'description'     => isset( $profile['gatewayDescription'] ) && $profile['gatewayDescription'] !== ''
-				? __( 'Transaction #' . (string) $txn->id . ' - ' . (string) $profile['gatewayDescription'], 'ifthenpay-payments-for-memberpress' )
-				: __( 'Transaction #' . (string) $txn->id, 'ifthenpay-payments-for-memberpress' ),
+				// translators: 1: internal transaction ID, 2: gateway description string from profile.
+				? sprintf( __( 'Transaction #%1$s – %2$s', 'ifthenpay-payments-for-memberpress' ), (string) $txn->id, (string) $profile['gatewayDescription'] )
+				// translators: %s: internal transaction ID.
+				: sprintf( __( 'Transaction #%s', 'ifthenpay-payments-for-memberpress' ), (string) $txn->id ),
 			'lang'            => self::map_wp_locale_to_lang( get_locale() ),
 			'expiredate'      => self::compute_expire_ymd( (int) $profile['expiryDays'] ),
 			'accounts'        => (string) $profile['accountKeys'],
@@ -68,7 +70,6 @@ final class IfthenpayHelper {
 			'success_url'     => self::page_url( $opts->thankyou_page_id, array( 'trans_num' => (string) $txn->trans_num ) ),
 			'cancel_url'      => $whk_url . '&status=cancelled&ref=' . (string) $txn->trans_num,
 			'error_url'       => $whk_url . '&status=error&ref=' . (string) $txn->trans_num,
-			// 'error_url'       => self::page_url( $opts->account_page_id ),
 		);
 	}
 

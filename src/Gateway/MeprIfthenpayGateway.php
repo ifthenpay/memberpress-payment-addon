@@ -230,7 +230,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			);
 			return MeprUtils::wp_redirect( $url );
 		} catch ( \Throwable $e ) {
-			throw new MeprGatewayException( __( 'ifthenpay | Payment Gateway: ' . $e->getMessage(), 'ifthenpay-payments-for-memberpress' ) );
+			// translators: %s is the underlying exception message from ifthenpay API during payment processing.
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
 		}
 	}
 
@@ -286,7 +287,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			);
 			return MeprUtils::wp_redirect( $pbl_url );
 		} catch ( \Throwable $e ) {
-			throw new MeprGatewayException( __( 'ifthenpay | Payment Gateway: ' . $e->getMessage(), 'ifthenpay-payments-for-memberpress' ) );
+			// translators: %s is the underlying exception message from ifthenpay API during subscription creation payment link generation.
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
 		}
 	}
 
@@ -330,7 +332,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			);
 			return MeprUtils::wp_redirect( $pbl_url );
 		} catch ( \Throwable $e ) {
-			throw new MeprGatewayException( __( 'ifthenpay | Payment Gateway: ' . $e->getMessage(), 'ifthenpay-payments-for-memberpress' ) );
+			// translators: %s is the underlying exception message from ifthenpay API during display payment page link generation.
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
 		}
 	}
 
@@ -915,7 +918,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			throw new MeprGatewayException( __( 'Invalid refund amount.', 'ifthenpay-payments-for-memberpress' ) );
 		}
 		try {
-			$payload = array(
+			$payload  = array(
 				'backofficekey' => $this->settings->backoffice_key,
 				'requestId'     => $iftp_txn->request_id,
 				'amount'        => (string) $refund_amount,
@@ -940,7 +943,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		} catch ( MeprGatewayException $e ) {
 			throw $e;
 		} catch ( \Throwable $e ) {
-			throw new MeprGatewayException( __( 'ifthenpay | Payment Gateway: ' . $e->getMessage(), 'ifthenpay-payments-for-memberpress' ) );
+			// translators: %s is the underlying exception message from ifthenpay API during refund processing.
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
 		}
 	}
 
@@ -1075,7 +1079,6 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 
 	/** Required abstracts (no-ops for features not used yet) */
-
 	public function process_signup_form( $txn ) {}
 	public function record_trial_payment( $txn ) {}
 	public function record_create_subscription() {}

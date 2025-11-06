@@ -119,6 +119,7 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 1. Gateway settings screen
 2. Checkout with method selection
 3. Final Customer subscription Update view
+4. Admin transaction with refund controls (modals)
 
 == Changelog ==
 

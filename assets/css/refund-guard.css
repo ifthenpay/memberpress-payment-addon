@@ -1,0 +1,308 @@
+:root {
+  --iftp-primary: #00609c;
+	--iftp-secondary: #00a7e2;
+	--iftp-tertiary: #001b2d;
+	--iftp-muted: #d5dfe3;
+	--iftp-gap: 12px;
+	--iftp-pad: 20px;
+	--iftp-pad-sm: 8px;
+	--iftp-font-base: 14px;
+	--iftp-dialog-min-height: 220px;
+	--iftp-txns-max-height: 260px;
+	--iftp-col-id: 10%;
+	--iftp-col-transaction: 27.5%;
+	--iftp-col-amount: 12.5%;
+	--iftp-col-starts: 25%;
+	--iftp-col-ends: 25%;
+	--iftp-radius: 6px;
+	--iftp-row-alt: #f7f7f7;
+	--iftp-row-hover: #eef6fb;
+}
+
+/* =============================
+   Transactions Summary / Totals
+   ============================= */
+
+.iftp-txns-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0 10px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #fff;
+  box-shadow: none;
+  position: relative;
+  z-index: 2;
+  min-height: 36px;
+}
+
+.iftp-txns-total-label {
+  color: var(--iftp-tertiary);
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.iftp-txns-total-amount {
+	color: var(--iftp-primary);
+	font-weight: 600;
+	font-size: 18px;
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.01em;
+}
+
+.iftp-txns-table-scroll {
+	max-height: var(--iftp-txns-max-height);
+	overflow-y: auto;
+	width: 100%;
+	display: block;
+}
+
+.iftp-txns-table-scroll > table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.iftp-txns-table-main tbody tr:nth-child(even) {
+  background: var(--iftp-row-alt);
+}
+
+.iftp-txns-table-main tbody tr:hover {
+  background: var(--iftp-row-hover);
+}
+
+dialog[role="dialog"]::backdrop,
+#iftp-refund-dialog::backdrop,
+#iftp-refund-cancel-modal::backdrop {
+	background: rgb(0 0 0 / 35%);
+}
+
+dialog[role="dialog"],
+#iftp-refund-dialog,
+#iftp-refund-cancel-modal {
+	border: none;
+	padding: 0;
+	border-radius: var(--iftp-radius);
+	max-width: 660px;
+	width: calc(100% - 32px);
+	box-shadow: 0 8px 24px rgb(16 24 40 / 16%);
+}
+
+.iftp-dialog-box {
+	padding: var(--iftp-pad);
+	background: #fff;
+	color: var(--iftp-tertiary);
+	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	box-sizing: border-box;
+	min-height: var(--iftp-dialog-min-height);
+	max-height: calc(80vh);
+	overflow: auto;
+	border-top: 1.5px solid var(--iftp-muted);
+}
+
+.iftp-dialog-header {
+	display: flex;
+	align-items: center;
+	gap: var(--iftp-gap);
+	margin: 0 0 12px;
+	justify-content: flex-start;
+}
+
+.iftp-dialog-title {
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.25;
+	font-weight: 600;
+	color: var(--iftp-tertiary);
+}
+
+.iftp-dialog-logo {
+	width: 28px;
+	height: 28px;
+	object-fit: contain;
+}
+
+.iftp-dialog-msg {
+	margin: 0 0 12px;
+	color: #374151;
+	font-size: var(--iftp-font-base);
+}
+
+.iftp-info-icon {
+  border: none;
+  background: var(--iftp-primary);
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: help;
+  margin-left: 6px;
+}
+
+.iftp-info-icon:focus-visible {
+	outline: 2px solid var(--iftp-secondary);
+	outline-offset: 2px;
+}
+
+/* =============================
+   Shared Input Styles (mono)
+   ============================= */
+#iftp-refund-code,
+#iftp-refund-amount {
+	box-sizing: border-box;
+	padding: 8px 10px;
+	border: 2px solid var(--iftp-muted);
+	border-radius: var(--iftp-radius);
+	background: #fff;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+	letter-spacing: 0.02em;
+	font-size: 14px;
+}
+
+/* Individual input adjustments */
+#iftp-refund-code {
+	width: 100%;
+	margin-bottom: var(--iftp-pad-sm);
+}
+
+.iftp-refund-amount-field {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	margin: 0 0 var(--iftp-pad-sm);
+}
+
+.iftp-refund-amount-field .iftp-refund-amount-currency {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--iftp-tertiary);
+	padding: 8px 6px 8px 2px;
+	line-height: 1;
+	user-select: none;
+}
+
+#iftp-refund-amount {
+	flex: 1;
+	width: 100%;
+}
+
+#iftp-refund-code:focus-visible,
+#iftp-refund-amount:focus-visible {
+	outline: none;
+	border-color: var(--iftp-primary);
+	box-shadow: 0 0 0 4px rgb(0 96 156 / 12%);
+}
+
+.iftp-dialog-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	margin: 12px 0 0;
+}
+
+.iftp-dialog-error {
+	margin: -2px 0 12px;
+	color: #b91c1c;
+	font-size: 14px;
+	min-height: 20px;
+	opacity: 0;
+	transition: opacity 180ms ease-in-out;
+}
+
+.iftp-dialog-error:not(:empty) {
+	opacity: 1;
+}
+
+.iftp-dialog-actions > .button,
+.iftp-dialog-actions > button {
+	padding: 8px 14px;
+	font-size: 14px;
+	border-radius: var(--iftp-radius) !important;
+	border: 2px solid var(--iftp-muted);
+	background: #fbfdff;
+	color: var(--iftp-tertiary);
+	cursor: pointer;
+	box-sizing: border-box;
+	outline: none;
+	transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.iftp-dialog-actions .button.button-primary,
+.iftp-dialog-actions button.button-primary {
+	background: var(--iftp-primary);
+	color: #fff;
+	border-color: transparent;
+	box-shadow: 0 4px 12px rgb(0 24 40 / 8%);
+}
+
+.iftp-dialog-actions .button.button-primary:hover,
+.iftp-dialog-actions button.button-primary:hover {
+	background: var(--iftp-secondary);
+	color: #fff;
+	border-color: transparent;
+}
+
+.iftp-dialog-actions .button:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.iftp-txns-table-main {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-size: 14px;
+}
+
+.iftp-txns-table {
+	scrollbar-gutter: stable;
+}
+
+.iftp-txns-table-main thead th,
+.iftp-txns-table-main td {
+	padding: 6px;
+	vertical-align: middle;
+	text-align: center;
+	overflow-wrap: anywhere;
+	min-width: 0;
+}
+
+.iftp-txns-table-main thead th {
+	font-weight: 600;
+	color: #fff;
+	position: sticky;
+	top: 0;
+	background: var(--iftp-primary);
+	z-index: 6;
+	border-bottom: 1.5px solid var(--iftp-muted);
+}
+
+.iftp-txns-table-main td {
+	color: var(--iftp-tertiary);
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.iftp-txns-table-main col.iftp-col-id { width: var(--iftp-col-id); }
+.iftp-txns-table-main col.iftp-col-transaction { width: var(--iftp-col-transaction); }
+.iftp-txns-table-main col.iftp-col-amount { width: var(--iftp-col-amount); }
+.iftp-txns-table-main col.iftp-col-starts { width: var(--iftp-col-starts); }
+.iftp-txns-table-main col.iftp-col-ends { width: var(--iftp-col-ends); }
+
+.iftp-txns-table-main td:nth-child(2),
+.iftp-txns-table-main th:nth-child(2) {
+	overflow-wrap: anywhere;
+}
+
+.iftp-txns-table-main td:nth-child(5),
+.iftp-txns-table-main th:nth-child(5) {
+	text-align: center;
+}
+
+

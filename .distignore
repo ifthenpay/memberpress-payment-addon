@@ -1,0 +1,11 @@
+/tests
+/node_modules
+/vendor/bin
+/.git
+/.github
+/.vscode
+/.editorconfig
+/phpunit.xml*
+/phpstan*.neon*
+/phpcs.xml*
+/*.md

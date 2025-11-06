@@ -14,7 +14,7 @@ Includes partial refunds, a merchant backoffice (basic sales & refunds), and sec
 
 == Description ==
 
-ifthenpay does not offer built-in recurring billing. This plugin makes recurring memberships work by creating simple, easy-to-understand payment periods. When a period is paid, the membership continues; if not paid, MemberPress marks that period as "Lapsed" and the system waits for the end-customer to Update their subscription by making a manual payment for the next computed period. Periods are computed sequentially so customers never lose paid time — the next period is only created after the previous one is completed. An admin may also change the subscription status if needed.
+ifthenpay does not offer built-in recurring billing. This plugin makes recurring memberships work by creating simple, easy-to-understand payment periods. When a period is paid, the membership continues; if not paid, MemberPress marks that period as "Lapsed" and the system waits for the end-customer to "Update" their subscription by making a manual payment for the next computed period. Periods are computed sequentially so customers never lose paid time — the next period is only created after the previous one is completed. An admin may also change the subscription status if needed.
 
 In plain terms you get:
 * One-time payments and recurring memberships (period engine)
@@ -107,7 +107,7 @@ This plugin integrates only with the ifthenpay platform and with WordPress/Membe
 	- Why credentials are needed: the Backoffice Key identifies your merchant account and the API Token scopes which payment methods are available for MemberPress. Request a Gateway Key for MemberPress via ifthenpay support/helpdesk and create an Integration in the Backoffice to generate an API Token.
 
 - Callbacks / Webhooks
-	- The plugin registers a callback URL with ifthenpay (you can confirm the URL in the Backoffice). when ifthenpay notifies us a payment has completed, we verify the signed payload and mark the matching period paid in MemberPress.
+	- The plugin registers a callback URL with ifthenpay (you can confirm the URL in the Backoffice). When ifthenpay notifies us a payment has completed, we verify the signed payload and mark the matching period paid in MemberPress.
 	- Only minimal, non-sensitive data is sent in callbacks (reference IDs, status, amount, payment methods). The plugin does not transmit or store raw card PANs or full bank account numbers.
 
 - MemberPress
@@ -123,7 +123,7 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 == Changelog ==
 
 = 1.0.0 =
-* Initial release: Period Engine, partial refunds, multi-method support, analytics dashboard, secure callbacks, hooks.
+* Initial release: Period Engine, partial refunds, multi-method support, aligned with the analytics dashboard, secure callbacks, hooks.
 
 == Upgrade Notice ==
 

@@ -94,7 +94,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 		// Initialize services if credentials exist
 		$this->client = ( $this->settings->backoffice_key !== '' && $this->settings->api_token !== '' )
-			? new IfthenpayClient( $this->settings->backoffice_key, $this->settings->api_token, true )
+			? new IfthenpayClient( $this->settings->backoffice_key, $this->settings->api_token )
 			: null;
 
 		$this->repo = ( $this->settings->backoffice_key !== '' && $this->settings->api_token !== '' )
@@ -594,7 +594,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			MeprUtils::exit_with_status( 405, __( 'Method Not Allowed', 'ifthenpay-payments-for-memberpress' ) );
 		}
 		if ( file_get_contents( 'php://input' ) !== '' ) {
-			MeprUtils::exit_with_status( 400, __( 'Bad Request', 'ifthenpay-payments-for-memberpress' ) );
+			MeprUtils::exit_with_status( 401, __( 'Unauthorized', 'ifthenpay-payments-for-memberpress' ) );
 		}
 
 		// Handle different notification types

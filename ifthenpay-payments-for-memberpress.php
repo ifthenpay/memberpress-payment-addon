@@ -13,7 +13,6 @@
  * License URI:         https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:         ifthenpay-payments-for-memberpress
  * Domain Path:         /languages
- * Requires Plugins:    memberpress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -198,8 +198,7 @@ final class Controller {
 		}
 		$context = isset( $_POST['context'] ) ? sanitize_key( (string) $_POST['context'] ) : 'single';
 
-		$raw_input  = (string) $_POST['chosen_amount'];
-		$normalized = str_replace( ',', '.', $raw_input );
+		$normalized = str_replace( ',', '.', sanitize_text_field( (string) $_POST['chosen_amount'] ) );
 		if ( ! is_numeric( $normalized ) ) {
 			wp_send_json_error( __( 'Amount must be numeric.', 'ifthenpay-payments-for-memberpress' ), 400 );
 		}
@@ -228,7 +227,7 @@ final class Controller {
 			if ( ! isset( $_POST['cap'] ) ) {
 				wp_send_json_error( __( 'Missing cap for mass refund.', 'ifthenpay-payments-for-memberpress' ), 400 );
 			}
-			$cap_raw = str_replace( ',', '.', (string) $_POST['cap'] );
+			$cap_raw = str_replace( ',', '.', sanitize_text_field( (string) $_POST['cap'] ) );
 			if ( ! is_numeric( $cap_raw ) ) {
 				wp_send_json_error( __( 'Invalid cap value.', 'ifthenpay-payments-for-memberpress' ), 400 );
 			}

@@ -151,8 +151,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		$mepr_options = MeprOptions::fetch();
 		$req          = $_REQUEST[ $mepr_options->integrations_str ][ $this->id ];
 
-		$backoffice_key = (string) $req['backoffice_key'];
-		$api_token      = (string) $req['api_token'];
+		$backoffice_key = sanitize_text_field( (string) $req['backoffice_key'] );
+		$api_token      = sanitize_text_field( (string) $req['api_token'] );
 
 		// Basic validation
 		if ( $backoffice_key === '' || $api_token === '' ) {
@@ -504,8 +504,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		}
 		// 2. Basic param + nonce validation.
 		$sub_id = isset( $_GET['sub'] ) ? (int) $_GET['sub'] : 0;
-		$nonce  = $_GET['_wpnonce'] ?? '';
-		if ( $sub_id <= 0 || ! wp_verify_nonce( $nonce, 'iftp_renew_' . $sub_id ) ) {
+		if ( $sub_id <= 0 || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ?? '' ), 'iftp_renew_' . $sub_id ) ) {
 			MeprUtils::exit_with_status( 400, __( 'Invalid request.', 'ifthenpay-payments-for-memberpress' ) );
 		}
 		// 3. Delegate creation & finalization.
@@ -620,19 +619,20 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 	 */
 	private function is_valid_webhook_query( IfthenpayTxn $iftp_txn ): bool {
 		// Validate amount
-		if ( (float) $iftp_txn->amount !== (float) $_GET['val'] ) {
+		if ( (float) $iftp_txn->amount !== (float) sanitize_text_field( $_GET['val'] ) ) {
 			return false;
 		}
 
 		// Validate gateway_key (reverse base64 of apk)
-		$decoded = trim( base64_decode( $_GET['apk'] ) );
+		$decoded = trim( base64_decode( sanitize_text_field( $_GET['apk'] ) ) );
 		if ( $iftp_txn->gateway_key !== $decoded ) {
 			return false;
 		}
 
 		// Validate pay_method (mtd)
+		$mtd             = sanitize_text_field( $_GET['mtd'] );
 		$allowed_methods = array( 'MB', 'MBWAY', 'PAYSHOP', 'CCARD', 'COFIDIS', 'GOOGLE', 'APPLE' );
-		if ( ! in_array( $_GET['mtd'], $allowed_methods, true ) && ! is_numeric( $_GET['mtd'] ) ) {
+		if ( ! in_array( $mtd, $allowed_methods, true ) && ! is_numeric( $mtd ) ) {
 			return false;
 		}
 
@@ -641,11 +641,12 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 	public function record_payment_failure() {
 		// Retrieve both local and MemberPress transactions
-		$iftp_txn = $this->repo->get_one_by_trans_num( $_GET['ref'] );
-		$mepr_txn = $this->get_mepr_transaction_by_trans_num( $_GET['ref'] );
+		$iftp_txn = $this->repo->get_one_by_trans_num( sanitize_text_field( $_GET['ref'] ) );
+		$mepr_txn = $this->get_mepr_transaction_by_trans_num( sanitize_text_field( $_GET['ref'] ) );
 
 		// Basic validation (single gate, includes the only allowed status values)
-		if ( ! $iftp_txn || ! $mepr_txn || ( $_GET['status'] !== 'cancelled' && $_GET['status'] !== 'error' ) ) {
+		$status = sanitize_text_field( $_GET['status'] );
+		if ( ! $iftp_txn || ! $mepr_txn || ( $status !== 'cancelled' && $status !== 'error' ) ) {
 			MeprUtils::exit_with_status( 404, __( 'Not Found', 'ifthenpay-payments-for-memberpress' ) );
 		}
 
@@ -658,7 +659,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		}
 
 		// Decide local state with a simple boolean
-		$is_cancelled = ( $_GET['status'] === 'cancelled' );
+		$is_cancelled = ( $status === 'cancelled' );
 		$new_state    = $is_cancelled ? IfthenpayTxn::STATE_CANCELLED : IfthenpayTxn::STATE_FAILED;
 
 		// Update local record
@@ -677,8 +678,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 	public function record_payment() {
 		// Retrieve both local and MemberPress transactions
-		$iftp_txn = $this->repo->get_one_by_trans_num( $_GET['ref'] );
-		$mepr_txn = $this->get_mepr_transaction_by_trans_num( $_GET['ref'] );
+		$iftp_txn = $this->repo->get_one_by_trans_num( sanitize_text_field( $_GET['ref'] ) );
+		$mepr_txn = $this->get_mepr_transaction_by_trans_num( sanitize_text_field( $_GET['ref'] ) );
 
 		// Basic validation
 		if ( ! $iftp_txn || ! $mepr_txn || ! $this->is_valid_webhook_query( $iftp_txn ) ) {
@@ -692,8 +693,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		// Update local record with payment details
 		$iftp_txn = $iftp_txn
 			->with_state( IfthenpayTxn::STATE_PAID )
-			->with_pay_method( $_GET['mtd'] )
-			->with_request_id( $_GET['req'] );
+			->with_pay_method( sanitize_text_field( $_GET['mtd'] ) )
+			->with_request_id( sanitize_text_field( $_GET['req'] ) );
 		$this->repo->update_by_trans_num( $iftp_txn->trans_num, $iftp_txn->to_db_array() );
 
 		// Update MemberPress transaction and handle subscription logic

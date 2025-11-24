@@ -45,7 +45,7 @@ final class Controller {
 
 	/** Send refund verification code via email. */
 	public function send_refund_token(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Request parsing & validation
@@ -97,7 +97,7 @@ final class Controller {
 
 	/** Verify a previously sent refund code. */
 	public function verify_refund_token(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Request parsing & validation
@@ -124,7 +124,7 @@ final class Controller {
 
 	/** Return refund/cancel modal data: eligible transactions + total. */
 	public function show_refund_and_cancel_modal(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Parse and validate request
@@ -150,7 +150,7 @@ final class Controller {
 
 	/** Fetch single refund base amount (cap) for a transaction. */
 	public function get_refund_amount(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		$req = RefundRequest::from_post( array( 'trans_num', 'trans_id' ) );
@@ -188,7 +188,7 @@ final class Controller {
 	 * - mass: cap is provided by frontend (sum of remaining future transactions already validated via modal payload)
 	 */
 	public function set_refund_amount(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Expect trans_num, trans_id (optional for mass) and chosen_amount
@@ -275,6 +275,9 @@ final class Controller {
 	 * @return array{txns:array<int,\stdClass>,total_amount:string}
 	 */
 	private function build_refund_modal_payload( array $future_pairs ): array {
+		// Security: Nonce validation and admin permission check via RefundPermissionService
+		$this->guard->verify_admin();
+
 		$txns  = array();
 		$total = 0.0;
 		foreach ( $future_pairs as $trans_num => $pair ) {

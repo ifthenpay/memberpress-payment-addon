@@ -9,6 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'You shall not pass!' );
 }
 
+/**
+ * MemberPress Payment Gateway for ifthenpay.
+ *
+ * This class extends MeprBaseRealGateway, the base class provided by MemberPress for implementing payment gateways.
+ * MemberPress is a WordPress plugin for membership management, and this gateway integrates ifthenpay's payment services.
+ * The class name 'MeprIfthenpayGateway' is required by MemberPress conventions for gateway discovery and loading.
+ */
 class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 	// Constants representing refund status codes:
@@ -114,7 +121,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		<table class="form-table">
 			<tbody>
 				<tr>
-					<th><label for="ifthenpay-backoffice-key"><?php _e( 'Backoffice Key', 'ifthenpay-payments-for-memberpress' ); ?></label></th>
+					<th><label for="ifthenpay-backoffice-key"><?php esc_html_e( 'Backoffice Key', 'ifthenpay-payments-for-memberpress' ); ?></label></th>
 					<td>
 						<input id="ifthenpay-backoffice-key" type="text" class="regular-text"
 							name="<?php echo esc_attr( "{$ns}[{$id}][backoffice_key]" ); ?>"
@@ -122,7 +129,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 					</td>
 				</tr>
 				<tr>
-					<th><label for="ifthenpay-api-token"><?php _e( 'API Token', 'ifthenpay-payments-for-memberpress' ); ?></label></th>
+					<th><label for="ifthenpay-api-token"><?php esc_html_e( 'API Token', 'ifthenpay-payments-for-memberpress' ); ?></label></th>
 					<td>
 						<input id="ifthenpay-api-token" type="text" class="regular-text"
 							name="<?php echo esc_attr( "{$ns}[{$id}][api_token]" ); ?>"
@@ -130,8 +137,8 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 					</td>
 				</tr>
 				<tr>
-					<th><?php _e( 'Webhook URL', 'ifthenpay-payments-for-memberpress' ); ?></th>
-					<td><?php echo MeprAppHelper::clipboard_input( $this->notify_url( 'whk' ) ); ?></td>
+					<th><?php esc_html_e( 'Webhook URL', 'ifthenpay-payments-for-memberpress' ); ?></th>
+					<td><?php echo wp_kses_post( MeprAppHelper::clipboard_input( esc_url( $this->notify_url( 'whk' ) ) ) ); ?></td>
 				</tr>
 			</tbody>
 		</table>
@@ -231,7 +238,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			return MeprUtils::wp_redirect( $url );
 		} catch ( \Throwable $e ) {
 			// translators: %s is the underlying exception message from ifthenpay API during payment processing.
-			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), esc_html( $e->getMessage() ) ) );
 		}
 	}
 
@@ -288,7 +295,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			return MeprUtils::wp_redirect( $pbl_url );
 		} catch ( \Throwable $e ) {
 			// translators: %s is the underlying exception message from ifthenpay API during subscription creation payment link generation.
-			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), esc_html( $e->getMessage() ) ) );
 		}
 	}
 
@@ -333,7 +340,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			return MeprUtils::wp_redirect( $pbl_url );
 		} catch ( \Throwable $e ) {
 			// translators: %s is the underlying exception message from ifthenpay API during display payment page link generation.
-			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), esc_html( $e->getMessage() ) ) );
 		}
 	}
 
@@ -419,7 +426,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 								printf(
 									/* translators: 1: formatted amount, 2: period label like "2 weeks" */
 									esc_html__( '%1$s charged each %2$s.', 'ifthenpay-payments-for-memberpress' ),
-									MeprAppHelper::format_currency( $amount ),
+									wp_kses_post( MeprAppHelper::format_currency( $amount ) ),
 									esc_html( $period_label )
 								);
 								?>
@@ -504,7 +511,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 		}
 		// 2. Basic param + nonce validation.
 		$sub_id = isset( $_GET['sub'] ) ? (int) $_GET['sub'] : 0;
-		if ( $sub_id <= 0 || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ?? '' ), 'iftp_renew_' . $sub_id ) ) {
+		if ( $sub_id <= 0 || ! wp_verify_nonce( $_GET['_wpnonce'] ?? '', 'iftp_renew_' . $sub_id ) ) {
 			MeprUtils::exit_with_status( 400, __( 'Invalid request.', 'ifthenpay-payments-for-memberpress' ) );
 		}
 		// 3. Delegate creation & finalization.
@@ -575,7 +582,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			return $pbl_url;
 		} catch ( \Throwable $e ) {
 			/* translators: %s: The error message returned when creating a payment link fails. */
-			MeprUtils::exit_with_status( 502, sprintf( __( 'Could not create payment link: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
+			MeprUtils::exit_with_status( 502, sprintf( __( 'Could not create payment link: %s', 'ifthenpay-payments-for-memberpress' ), esc_html( $e->getMessage() ) ) );
 		}
 	}
 
@@ -945,7 +952,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 			throw $e;
 		} catch ( \Throwable $e ) {
 			// translators: %s is the underlying exception message from ifthenpay API during refund processing.
-			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), $e->getMessage() ) );
+			throw new MeprGatewayException( sprintf( __( 'ifthenpay | Payment Gateway: %s', 'ifthenpay-payments-for-memberpress' ), esc_html( $e->getMessage() ) ) );
 		}
 	}
 

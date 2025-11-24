@@ -98,22 +98,24 @@ Process:
 * Optional min/max limits can guide consistency.
 * Approval required before issuing ifthenpay refund or internal credit note.
 
-== External Services & Dependencies ==
-This plugin integrates only with the ifthenpay platform and with WordPress/MemberPress.
+== External Services ==
 
-- ifthenpay Backoffice & Integrations
-	- What we send: the plugin sends your Backoffice Key and API Token (kept only in your site settings), minimal order/subscription details (transaction or subscription ID, user identifier, amount) used only to match payments in ifthenpay.
-	- What we receive: ifthenpay returns payment references, payment status updates and timestamps. These are used to mark periods as paid, update MemberPress subscriptions and populate the merchant backoffice.
-	- Why credentials are needed: the Backoffice Key identifies your merchant account and the API Token scopes which payment methods are available for MemberPress. Request a Gateway Key for MemberPress via ifthenpay support/helpdesk and create an Integration in the Backoffice to generate an API Token.
+This plugin integrates with the ifthenpay payment platform to process payments for MemberPress memberships. ifthenpay is a third-party service that provides secure payment processing for various methods including cards, wallets, and local bank transfers.
 
-- Callbacks / Webhooks
-	- The plugin registers a callback URL with ifthenpay (you can confirm the URL in the Backoffice). When ifthenpay notifies us a payment has completed, we verify the signed payload and mark the matching period paid in MemberPress.
-	- Only minimal, non-sensitive data is sent in callbacks (reference IDs, status, amount, payment methods). The plugin does not transmit or store raw card PANs or full bank account numbers.
+- **ifthenpay Backoffice & Integrations**
+  - **What it is and what it is used for**: The ifthenpay Backoffice is the merchant dashboard for managing payment integrations. The plugin uses the ifthenpay API to retrieve account configuration, generate payment links, activate webhooks, and process refunds.
+  - **What data is sent and when**:
+    - During setup: Backoffice Key and API Token (stored securely in site settings) to authenticate and retrieve available payment methods.
+    - During payment processing: Minimal transaction details including transaction ID, user identifier, amount, and subscription details to generate payment references.
+    - During refunds: Backoffice Key, request ID, and refund amount to process partial refunds.
+  - **End-User License Agreement (EULA)**: https://ifthenpay.com/eula/
+  - **Privacy Policy**: https://ifthenpay.com/politica-de-privacidade/
 
-- MemberPress
-	- The plugin reads MemberPress subscription schemas to compute periods and updates subscriptions based on ifthenpay confirmations. No extra third-party PHP libraries are required beyond WordPress and MemberPress.
+- **Callbacks / Webhooks**
+  - **What it is and what it is used for**: Webhooks (callbacks) are used for automatic payment confirmations. When a payment is completed, ifthenpay sends a signed notification to the plugin to update the transaction status in MemberPress.
+  - **What data is sent and when**: Only upon payment completion: reference IDs, payment status, amount, payment method, and request ID. No sensitive card or bank details are transmitted.
 
-All network requests are performed server-side over HTTPS. Sensitive credentials are stored in site options and are not publicly exposed.
+All network requests are performed server-side over HTTPS. Sensitive credentials are stored in site options and are not publicly exposed. The plugin does not store raw card numbers or full bank account details.
 
 == Screenshots ==
 1. Gateway settings screen

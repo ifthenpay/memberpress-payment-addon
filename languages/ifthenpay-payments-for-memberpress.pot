@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-06T12:00:04+00:00\n"
+"POT-Creation-Date: 2025-11-06T12:46:58+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ifthenpay-payments-for-memberpress\n"
@@ -178,7 +178,7 @@ msgid "This email was generated automatically."
 msgstr ""
 
 #. translators: %d: The number of minutes before the code expires.
-#: src/Ajax/Services/RefundMailerService.php:116
+#: src/Ajax/Services/RefundMailerService.php:168
 #, php-format
 msgid "This code expires in %d minutes."
 msgstr ""
@@ -187,9 +187,16 @@ msgstr ""
 msgid "Unauthorized."
 msgstr ""
 
-#: src/Api/IfthenpayHelper.php:62
+#. translators: 1: internal transaction ID, 2: gateway description string from profile.
 #: src/Api/IfthenpayHelper.php:63
-msgid "Transaction #"
+#, php-format
+msgid "Transaction #%1$s – %2$s"
+msgstr ""
+
+#. translators: %s: internal transaction ID.
+#: src/Api/IfthenpayHelper.php:65
+#, php-format
+msgid "Transaction #%s"
 msgstr ""
 
 #: src/Gateway/MeprIfthenpayGateway.php:42
@@ -221,8 +228,8 @@ msgid "Failed to activate ifthenpay callback."
 msgstr ""
 
 #: src/Gateway/MeprIfthenpayGateway.php:197
-#: src/Gateway/MeprIfthenpayGateway.php:256
-#: src/Gateway/MeprIfthenpayGateway.php:300
+#: src/Gateway/MeprIfthenpayGateway.php:257
+#: src/Gateway/MeprIfthenpayGateway.php:302
 msgid "ifthenpay is not configured. Save Backoffice Key and API Token first."
 msgstr ""
 
@@ -231,173 +238,178 @@ msgid "This gateway currently supports one-time payments only."
 msgstr ""
 
 #: src/Gateway/MeprIfthenpayGateway.php:203
-#: src/Gateway/MeprIfthenpayGateway.php:259
-#: src/Gateway/MeprIfthenpayGateway.php:303
+#: src/Gateway/MeprIfthenpayGateway.php:260
+#: src/Gateway/MeprIfthenpayGateway.php:305
 msgid "This gateway only supports EUR currency."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:233
-#: src/Gateway/MeprIfthenpayGateway.php:289
-#: src/Gateway/MeprIfthenpayGateway.php:333
-#: src/Gateway/MeprIfthenpayGateway.php:943
-msgid "ifthenpay | Payment Gateway: "
+#. translators: %s is the underlying exception message from ifthenpay API during payment processing.
+#. translators: %s is the underlying exception message from ifthenpay API during subscription creation payment link generation.
+#. translators: %s is the underlying exception message from ifthenpay API during display payment page link generation.
+#. translators: %s is the underlying exception message from ifthenpay API during refund processing.
+#: src/Gateway/MeprIfthenpayGateway.php:234
+#: src/Gateway/MeprIfthenpayGateway.php:291
+#: src/Gateway/MeprIfthenpayGateway.php:336
+#: src/Gateway/MeprIfthenpayGateway.php:947
+#, php-format
+msgid "ifthenpay | Payment Gateway: %s"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:349
+#: src/Gateway/MeprIfthenpayGateway.php:352
 msgid "The payment gateway is not configured. Please contact support."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:354
-#: src/Gateway/MeprIfthenpayGateway.php:517
-#: src/Gateway/MeprIfthenpayGateway.php:799
+#: src/Gateway/MeprIfthenpayGateway.php:357
+#: src/Gateway/MeprIfthenpayGateway.php:520
+#: src/Gateway/MeprIfthenpayGateway.php:802
 msgid "Invalid subscription."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:390
+#: src/Gateway/MeprIfthenpayGateway.php:393
 msgid "No time lost"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:396
+#: src/Gateway/MeprIfthenpayGateway.php:399
 msgid "Price / period"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:401
+#: src/Gateway/MeprIfthenpayGateway.php:404
 msgid "Starts"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:407
+#: src/Gateway/MeprIfthenpayGateway.php:410
 msgid "(now)"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:412
+#: src/Gateway/MeprIfthenpayGateway.php:415
 msgid "Billing"
 msgstr ""
 
 #. translators: 1: formatted amount, 2: period label like "2 weeks"
-#: src/Gateway/MeprIfthenpayGateway.php:418
+#: src/Gateway/MeprIfthenpayGateway.php:421
 #, php-format
 msgid "%1$s charged each %2$s."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:427
+#: src/Gateway/MeprIfthenpayGateway.php:430
 msgid "Ends"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:438
+#: src/Gateway/MeprIfthenpayGateway.php:441
 msgid "Pay securely to renew your subscription"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:442
+#: src/Gateway/MeprIfthenpayGateway.php:445
 msgid "Pay securely to renew"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:445
+#: src/Gateway/MeprIfthenpayGateway.php:448
 msgid "After payment you’ll be returned automatically. If not, come back and refresh."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:500
-#: src/Gateway/MeprIfthenpayGateway.php:594
+#: src/Gateway/MeprIfthenpayGateway.php:503
+#: src/Gateway/MeprIfthenpayGateway.php:597
 msgid "Method Not Allowed"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:506
+#: src/Gateway/MeprIfthenpayGateway.php:509
 msgid "Invalid request."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:521
+#: src/Gateway/MeprIfthenpayGateway.php:524
 msgid "Not allowed."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:544
+#: src/Gateway/MeprIfthenpayGateway.php:547
 msgid "No pending transaction to finalize."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:547
+#: src/Gateway/MeprIfthenpayGateway.php:550
 msgid "Gateway not configured."
 msgstr ""
 
 #. translators: %s: The error message returned when creating a payment link fails.
-#: src/Gateway/MeprIfthenpayGateway.php:576
+#: src/Gateway/MeprIfthenpayGateway.php:579
 #, php-format
 msgid "Could not create payment link: %s"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:597
+#: src/Gateway/MeprIfthenpayGateway.php:600
 msgid "Unauthorized"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:609
+#: src/Gateway/MeprIfthenpayGateway.php:612
 msgid "Bad Request"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:646
-#: src/Gateway/MeprIfthenpayGateway.php:682
+#: src/Gateway/MeprIfthenpayGateway.php:649
+#: src/Gateway/MeprIfthenpayGateway.php:685
 msgid "Not Found"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:729
-#: src/Gateway/MeprIfthenpayGateway.php:814
+#: src/Gateway/MeprIfthenpayGateway.php:732
+#: src/Gateway/MeprIfthenpayGateway.php:817
 msgid "Payment gateway not configured."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:807
+#: src/Gateway/MeprIfthenpayGateway.php:810
 msgid "Your refund and cancellation request has been sent to the site administrator. Only site administrators may perform mass cancellations via the gateway."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:809
+#: src/Gateway/MeprIfthenpayGateway.php:812
 msgid "Not allowed to cancel this subscription. Only site administrators may perform mass cancellations via the gateway."
 msgstr ""
 
 #. translators: %d: The number of refund errors that occurred during cancellation.
-#: src/Gateway/MeprIfthenpayGateway.php:858
+#: src/Gateway/MeprIfthenpayGateway.php:861
 #, php-format
 msgid "Cancellation failed: %d refund error(s) occurred."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:859
+#: src/Gateway/MeprIfthenpayGateway.php:862
 msgid "Details:"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:863
+#: src/Gateway/MeprIfthenpayGateway.php:866
 msgid "Please retry or contact support if the issue persists."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:915
+#: src/Gateway/MeprIfthenpayGateway.php:918
 msgid "Invalid refund amount."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:934
+#: src/Gateway/MeprIfthenpayGateway.php:937
 msgid "Payment/s could not be refunded."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:936
+#: src/Gateway/MeprIfthenpayGateway.php:939
 msgid "Insufficient funds. The balance is the sum of all available funds that have not yet been transferred to the customer's account, meaning all payments made from 8:00 PM the previous day until the time of the refund."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:938
+#: src/Gateway/MeprIfthenpayGateway.php:941
 msgid "Unexpected refund response."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:957
+#: src/Gateway/MeprIfthenpayGateway.php:961
 msgid "Refund target not found."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:960
+#: src/Gateway/MeprIfthenpayGateway.php:964
 msgid "Transaction is not in a refundable state."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:963
+#: src/Gateway/MeprIfthenpayGateway.php:967
 msgid "Already refunded."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:966
+#: src/Gateway/MeprIfthenpayGateway.php:970
 msgid "Expired transaction."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:970
+#: src/Gateway/MeprIfthenpayGateway.php:974
 msgid "Missing gateway request ID."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:973
+#: src/Gateway/MeprIfthenpayGateway.php:977
 msgid "Amount mismatch."
 msgstr ""

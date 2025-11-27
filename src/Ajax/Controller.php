@@ -45,7 +45,7 @@ final class Controller {
 
 	/** Send refund verification code via email. */
 	public function send_refund_token(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Request parsing & validation
@@ -71,14 +71,14 @@ final class Controller {
 		// Payment method validation
 		$allowed_methods = array( 'MBWAY', 'CCARD', 'GOOGLE', 'APPLE' );
 		if ( ! in_array( $iftp_txn->pay_method, $allowed_methods, true ) ) {
-			   /* translators: %s: The payment method name that does not support refunds. */
-			   wp_send_json_error(
-				   sprintf(
-					   __( 'Refunds are not supported for this payment method: %s.', 'ifthenpay-payments-for-memberpress' ),
-					   $iftp_txn->pay_method
-				   ),
-				   400
-			   );
+				/* translators: %s: The payment method name that does not support refunds. */
+				wp_send_json_error(
+					sprintf(
+						__( 'Refunds are not supported for this payment method: %s.', 'ifthenpay-payments-for-memberpress' ),
+						$iftp_txn->pay_method
+					),
+					400
+				);
 		}
 
 		// Token generation & email sending
@@ -97,7 +97,7 @@ final class Controller {
 
 	/** Verify a previously sent refund code. */
 	public function verify_refund_token(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Request parsing & validation
@@ -124,7 +124,7 @@ final class Controller {
 
 	/** Return refund/cancel modal data: eligible transactions + total. */
 	public function show_refund_and_cancel_modal(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Parse and validate request
@@ -150,7 +150,7 @@ final class Controller {
 
 	/** Fetch single refund base amount (cap) for a transaction. */
 	public function get_refund_amount(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		$req = RefundRequest::from_post( array( 'trans_num', 'trans_id' ) );
@@ -188,7 +188,7 @@ final class Controller {
 	 * - mass: cap is provided by frontend (sum of remaining future transactions already validated via modal payload)
 	 */
 	public function set_refund_amount(): void {
-		// Permission check
+		// Security: Nonce validation and admin permission check via RefundPermissionService
 		$this->guard->verify_admin();
 
 		// Expect trans_num, trans_id (optional for mass) and chosen_amount
@@ -198,8 +198,7 @@ final class Controller {
 		}
 		$context = isset( $_POST['context'] ) ? sanitize_key( (string) $_POST['context'] ) : 'single';
 
-		$raw_input  = (string) $_POST['chosen_amount'];
-		$normalized = str_replace( ',', '.', $raw_input );
+		$normalized = str_replace( ',', '.', sanitize_text_field( (string) $_POST['chosen_amount'] ) );
 		if ( ! is_numeric( $normalized ) ) {
 			wp_send_json_error( __( 'Amount must be numeric.', 'ifthenpay-payments-for-memberpress' ), 400 );
 		}
@@ -228,7 +227,7 @@ final class Controller {
 			if ( ! isset( $_POST['cap'] ) ) {
 				wp_send_json_error( __( 'Missing cap for mass refund.', 'ifthenpay-payments-for-memberpress' ), 400 );
 			}
-			$cap_raw = str_replace( ',', '.', (string) $_POST['cap'] );
+			$cap_raw = str_replace( ',', '.', sanitize_text_field( (string) $_POST['cap'] ) );
 			if ( ! is_numeric( $cap_raw ) ) {
 				wp_send_json_error( __( 'Invalid cap value.', 'ifthenpay-payments-for-memberpress' ), 400 );
 			}
@@ -276,6 +275,9 @@ final class Controller {
 	 * @return array{txns:array<int,\stdClass>,total_amount:string}
 	 */
 	private function build_refund_modal_payload( array $future_pairs ): array {
+		// Security: Nonce validation and admin permission check via RefundPermissionService
+		$this->guard->verify_admin();
+
 		$txns  = array();
 		$total = 0.0;
 		foreach ( $future_pairs as $trans_num => $pair ) {

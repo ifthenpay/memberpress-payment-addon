@@ -99,6 +99,57 @@ final class RefundMailerService {
 		wp_mail( $admin_email, $subject, $body, array( 'Content-Type: text/html; charset=UTF-8' ) );
 	}
 
+	/**
+	 * Build the rows HTML table chunk.
+	 *
+	 * @param array $rows Associative label => value.
+	 */
+	private function build_rows_html( array $rows ): string {
+		$html = '';
+		foreach ( $rows as $label => $value ) {
+			$label = esc_html( (string) $label );
+			$value = esc_html( (string) $value );
+			$html .= '<tr>'
+				. '<td style="width:180px;padding:6px 10px;background:#f9fafb;color:#4a5568;font-size:13px;border-radius:8px;">' . $label . '</td>'
+				. '<td style="padding:6px 10px;font-size:13px;color:#001b2d;">' . $value . '</td>'
+				. '</tr>';
+		}
+		return $html;
+	}
+
+	/** Build intro paragraphs HTML. */
+	private function build_intro_html( array $intro_paras ): string {
+		$intro_html = '';
+		foreach ( $intro_paras as $p ) {
+			$intro_html .= '<p style="margin:0 0 12px 0;font-size:14px;line-height:1.55;color:#334155;text-align:center;">' . esc_html( (string) $p ) . '</p>';
+		}
+		return $intro_html;
+	}
+
+	/** Build contacts block HTML. */
+	private function build_contacts_html(): string {
+		$secondary = esc_attr( $this->color_secondary );
+		return '<div style="margin-top:6px;">256 245 560 • 808 222 777*</div>'
+			. '<div>'
+			. '<a href="mailto:suporte@ifthenpay.com" style="color:' . $secondary . ';text-decoration:none;">suporte@ifthenpay.com</a>'
+			. '&nbsp;·&nbsp;'
+			. '<a href="https://helpdesk.ifthenpay.com/" style="color:' . $secondary . ';text-decoration:none;">https://helpdesk.ifthenpay.com/</a>'
+			. '</div>'
+			. '<div style="margin-top:8px;opacity:.8;">* Call cost to the national fixed network.</div>';
+	}
+
+	/** Build code verification block (optional). */
+	private function build_code_block( string $code_safe, bool $show_code ): string {
+		if ( ! $show_code || $code_safe === '' ) {
+			return '';
+		}
+		return '<tr><td style="padding:8px 0;text-align:center;">'
+			. '<div style="display:inline-block;padding:10px 14px;border:1px solid ' . esc_attr( $this->color_quaternary ) . ';border-radius:10px;background:#f9fafb;">'
+			. '<code style="font-size:26px;letter-spacing:6px;font-weight:700;color:' . esc_attr( $this->color_tertiary ) . ';display:inline-block;">' . $code_safe . '</code>'
+			. '</div>'
+			. '</td></tr>';
+	}
+
 	/** Render HTML email. Expects keys: headline, code, rows (assoc), show_code, expiry_minutes, ignore_copy, intro_paragraphs, before_rows_html. */
 	private function render_template( array $data ): string {
 		// Basic extraction (call sites controlled)
@@ -111,17 +162,12 @@ final class RefundMailerService {
 		$intro_paras      = (array) $data['intro_paragraphs'];
 		$before_rows_html = (string) ( $data['before_rows_html'] ?? '' );
 
+		// Derived / computed values used by helpers
 		$code_safe = esc_html( $code_raw );
 		/* translators: %d: The number of minutes before the code expires. */
-		$expiry    = ( $show_code && $expiry_minutes > 0 ) ? esc_html( sprintf( __( 'This code expires in %d minutes.', 'ifthenpay-payments-for-memberpress' ), $expiry_minutes ) ) : '';
-
-		$c1   = $this->color_primary;
-		$c2   = $this->color_secondary;
-		$c3   = $this->color_tertiary;
-		$c4   = $this->color_quaternary;
-		$year = esc_html( date_i18n( 'Y' ) );
-
-		// Logo markup
+		$expiry = ( $show_code && $expiry_minutes > 0 ) ? esc_html( sprintf( __( 'This code expires in %d minutes.', 'ifthenpay-payments-for-memberpress' ), $expiry_minutes ) ) : '';
+		// Use class properties directly for color palette (avoid local aliases).
+		$year        = esc_html( date_i18n( 'Y' ) );
 		$header_logo = '<a href="' . esc_url( $this->company_site_url ) . '" style="text-decoration:none;display:inline-block;line-height:0;">'
 			. '<img src="' . esc_url( $this->header_logo_url ) . '" alt="' . esc_attr( $this->company_name ) . '" height="28" style="display:block;border:0;height:28px;width:auto;" />'
 			. '</a>';
@@ -129,50 +175,11 @@ final class RefundMailerService {
 			. '<img src="' . esc_url( $this->footer_logo_url ) . '" alt="' . esc_attr( $this->company_name ) . '" height="28" style="display:block;border:0;height:28px;width:auto;" />'
 			. '</a>';
 
-		// Data rows
-		$rows_html = '';
-		foreach ( $rows as $label => $value ) {
-			$label      = esc_html__( (string) $label, 'ifthenpay-payments-for-memberpress' );
-			$value      = esc_html( (string) $value );
-			$rows_html .= <<<HTML
-<tr>
-	<td style="width:180px;padding:6px 10px;background:#f9fafb;color:#4a5568;font-size:13px;border-radius:8px;">{$label}</td>
-	<td style="padding:6px 10px;font-size:13px;color:{$c3};">{$value}</td>
-</tr>
-HTML;
-		}
-
-		// Intro paragraphs
-		$intro_html = '';
-		foreach ( $intro_paras as $p ) {
-			$p           = esc_html( (string) $p );
-			$intro_html .= '<p style="margin:0 0 12px 0;font-size:14px;line-height:1.55;color:#334155;text-align:center;">' . $p . '</p>';
-		}
-
-		// Contacts block
-		$contacts_html = <<<HTML
-<div style="margin-top:6px;">256 245 560 • 808 222 777*</div>
-<div>
-		<a href="mailto:suporte@ifthenpay.com" style="color:{$c2};text-decoration:none;">suporte@ifthenpay.com</a>
-		&nbsp;·&nbsp;
-		<a href="https://helpdesk.ifthenpay.com/" style="color:{$c2};text-decoration:none;">https://helpdesk.ifthenpay.com/</a>
-</div>
-<div style="margin-top:8px;opacity:.8;">* Call cost to the national fixed network.</div>
-HTML;
-
-		// Code block
-		$code_block = '';
-		if ( $show_code && $code_safe !== '' ) {
-			$code_block = <<<HTML
-<tr>
-	<td style="padding:8px 0;text-align:center;">
-		<div style="display:inline-block;padding:10px 14px;border:1px solid {$c4};border-radius:10px;background:#f9fafb;">
-			<code style="font-size:26px;letter-spacing:6px;font-weight:700;color:{$c3};display:inline-block;">{$code_safe}</code>
-		</div>
-	</td>
-</tr>
-HTML;
-		}
+		// Build modular chunks
+		$rows_html     = $this->build_rows_html( $rows );
+		$intro_html    = $this->build_intro_html( $intro_paras );
+		$contacts_html = $this->build_contacts_html();
+		$code_block    = $this->build_code_block( $code_safe, $show_code );
 
 		// Meta / expiry + ignore message
 		$meta_lines_html = '';
@@ -185,52 +192,31 @@ HTML;
 		}
 
 		// Final HTML output
-		return <<<HTML
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>{$headline}</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-	</head>
-	<body style="margin:0;padding:0;background:#ffffff;">
-		<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
-			<tr>
-				<td align="center" style="padding:20px 16px;">
-					<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:{$c3};">
-						<!-- Header: logo + headline -->
-						<tr><td style="padding:4px 0 0;text-align:center;">{$header_logo}</td></tr>
-						<tr><td><h1 style="margin:16px;font-size:28px;line-height:1.2;font-weight:500;text-align:center;">{$headline}</h1></td></tr>
-						<!-- Optional: Intro Paragraph -->
-						<tr><td style="text-align:center;">{$intro_html}</td></tr>
-						<!-- Optional: Code Block -->
-						{$code_block}
-						<!-- Meta (expiry only) -->
-						<tr><td>{$meta_lines_html}</td></tr>
-						<!-- Optional: Block Before Rows (admin actions, etc.) -->
-						{$before_rows_html}
-						<!-- Data Rows Table -->
-						<tr>
-							<td style="padding:32px 0;display:flex;justify-content:center;">
-								<table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 8px;">{$rows_html}</table>
-							</td>
-						</tr>
-						<!-- Ignore Copy (positioned before footer divider) -->
-						{$ignore_html}
-						<!-- Footer -->
-						<tr>
-							<td style="padding:32px 0 0;border-top:1px solid #eaeef2;text-align:center;">
-								<div style="margin-bottom:8px;">{$footer_logo}</div>
-								<div style="font-size:12px;line-height:1.6;color:#334155;">{$contacts_html}</div>
-								<div style="margin:8px;font-size:12px;color:#6b7280;">© {$year} {$this->company_name}</div>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</body>
-</html>
-HTML;
+		$tertiary = esc_attr( $this->color_tertiary );
+		return '<!doctype html>'
+			. '<html lang="en">'
+			. '<head>'
+			. '<meta charset="UTF-8" />'
+			. '<title>' . $headline . '</title>'
+			. '<meta name="viewport" content="width=device-width,initial-scale=1" />'
+			. '</head>'
+			. '<body style="margin:0;padding:0;background:#ffffff;">'
+			. '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">'
+			. '<tr><td align="center" style="padding:20px 16px;">'
+			. '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:' . $tertiary . ';">'
+			. '<tr><td style="padding:4px 0 0;text-align:center;">' . $header_logo . '</td></tr>'
+			. '<tr><td><h1 style="margin:16px;font-size:28px;line-height:1.2;font-weight:500;text-align:center;">' . $headline . '</h1></td></tr>'
+			. '<tr><td style="text-align:center;">' . $intro_html . '</td></tr>'
+			. $code_block
+			. '<tr><td>' . $meta_lines_html . '</td></tr>'
+			. $before_rows_html
+			. '<tr><td style="padding:32px 0;display:flex;justify-content:center;"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 8px;">' . $rows_html . '</table></td></tr>'
+			. $ignore_html
+			. '<tr><td style="padding:32px 0 0;border-top:1px solid #eaeef2;text-align:center;"><div style="margin-bottom:8px;">' . $footer_logo . '</div><div style="font-size:12px;line-height:1.6;color:#334155;">' . $contacts_html . '</div><div style="margin:8px;font-size:12px;color:#6b7280;">© ' . $year . ' ' . $this->company_name . '</div></td></tr>'
+			. '</table>'
+			. '</td></tr>'
+			. '</table>'
+			. '</body>'
+			. '</html>';
 	}
 }

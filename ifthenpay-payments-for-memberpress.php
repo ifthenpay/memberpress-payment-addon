@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:         ifthenpay | Payments for MemberPress
- * Plugin URI:          https://github.com/ifthenpay/memberpress-payment-addon
+ * Plugin URI:          https://github.com/ifthenpay/ifthenpay-payments-for-memberpress
  * Description:         MemberPress integration for payments with the ifthenpay gateway: accept cards, digital & mobile wallets, local bank transfers and alternative methods—secure one-time payments and recurring (period-based) subscriptions.
  * Version:             1.0.0
  * Requires at least:   6.5
@@ -13,7 +13,6 @@
  * License URI:         https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:         ifthenpay-payments-for-memberpress
  * Domain Path:         /languages
- * Requires Plugins:    memberpress
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

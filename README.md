@@ -1,10 +1,26 @@
-# ifthenpay Payments for MemberPress
+# ifthenpay | Payments for MemberPress
 
 Adds ifthenpay payment methods to MemberPress: cards, wallets, local bank transfers; supports one-time and period-based recurring memberships.
 
 Includes partial refunds, a merchant backoffice (basic sales & refunds), and secure signed callbacks for automatic payment confirmation.
 
 ---
+
+## Table of Contents
+
+- [Description](#description)
+- [Key Features](#key-features)
+- [How Period-Based Recurrence Works](#how-period-based-recurrence-works)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Refund Policy Management](#refund-policy-management)
+- [External Services](#external-services)
+- [Screenshots](#screenshots)
+- [Changelog](#changelog)
+- [Upgrade Notice](#upgrade-notice)
+- [License](#license)
+- [Support](#support)
 
 ## Description
 
@@ -60,45 +76,55 @@ All settings are made in MemberPress and in your ifthenpay Backoffice. The plugi
 
 ## Frequently Asked Questions
 
-### Does ifthenpay now support real recurring billing?
-
+<details>
+<summary><strong>Does ifthenpay now support real recurring billing?</strong></summary>
 No. ifthenpay does not provide native recurring billing. This plugin makes recurring memberships work using payment periods as described above.
+</details>
 
-### Are payment details stored?
-
+<details>
+<summary><strong>Are payment details stored?</strong></summary>
 No. The plugin does not store card numbers or full bank details. Only small references needed for matching payments are kept.
+</details>
 
-### How are partial refunds calculated?
-
+<details>
+<summary><strong>How are partial refunds calculated?</strong></summary>
 Admins enter the desired refund amount per transaction or period when issuing a refund. The plugin can suggest values but the admin finalizes and approves the refund.
+</details>
 
-### What happens if a user misses a period payment?
-
+<details>
+<summary><strong>What happens if a user misses a period payment?</strong></summary>
 The subscription period is marked Lapsed in MemberPress. The customer must Update their subscription (manual payment for the next period) to restore active access; Admins can also reinstate by manually changing the status.
+</details>
 
-### Can I customize period lengths?
-
+<details>
+<summary><strong>Can I customize period lengths?</strong></summary>
 The integration reads the membership’s subscription schema (period type and amount) and automatically computes the next periods and transactions.
+</details>
 
-### Do upgrades/downgrades recalculate periods?
-
+<details>
+<summary><strong>Do upgrades/downgrades recalculate periods?</strong></summary>
 Yes. Future periods are recalculated; current period may optionally prorate (configurable).
+</details>
 
-### Is there a sandbox?
-
+<details>
+<summary><strong>Is there a sandbox?</strong></summary>
 ifthenpay may provide test entities; if unavailable, use a low-value live test. Future roadmap includes an internal simulation mode.
+</details>
 
-### Which payment methods are supported?
-
+<details>
+<summary><strong>Which payment methods are supported?</strong></summary>
 Any ifthenpay method attached to the Gateway Key (e.g. Multibanco, MB WAY, Payshop, Cofidis Pay, Pix, Credit Card if provisioned).
+</details>
 
-### How secure is the integration?
-
+<details>
+<summary><strong>How secure is the integration?</strong></summary>
 Callbacks are signed; requests are encrypted over HTTPS; data minimized; nonces protect admin forms.
+</details>
 
-### Does this replace MemberPress trials?
-
+<details>
+<summary><strong>Does this replace MemberPress trials?</strong></summary>
 Trials still work; the first period can be zero-amount and becomes payable only when the trial ends.
+</details>
 
 ## Refund Policy Management
 
@@ -120,8 +146,8 @@ This plugin integrates with the ifthenpay payment platform to process payments f
     - During setup: Backoffice Key and API Token (stored securely in site settings) to authenticate and retrieve available payment methods.
     - During payment processing: Minimal transaction details including transaction ID, user identifier, amount, and subscription details to generate payment references.
     - During refunds: Backoffice Key, request ID, and refund amount to process partial refunds.
-  - **End-User License Agreement (EULA)**: https://ifthenpay.com/eula/
-  - **Privacy Policy**: https://ifthenpay.com/politica-de-privacidade/
+  - **End-User License Agreement (EULA)**: [EULA](https://ifthenpay.com/eula/)
+  - **Privacy Policy**: [Privacy Policy](https://ifthenpay.com/politica-de-privacidade/)
 
 - **Callbacks / Webhooks**
   - **What it is and what it is used for**: Webhooks (callbacks) are used for automatic payment confirmations. When a payment is completed, ifthenpay sends a signed notification to the plugin to update the transaction status in MemberPress.
@@ -131,15 +157,31 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 
 ## Screenshots
 
-1. Gateway settings screen
-2. Checkout with method selection
-3. Customer subscription Update view
+Below are screenshots demonstrating key features and interfaces of the plugin:
+
+1. **Gateway Settings under MemberPress Payments Settings**  
+   ![Gateway Settings](.wordpress-org/screenshot-1.png)
+
+2. **Checkout example for a basic one time subscription**  
+   ![Checkout Example](.wordpress-org/screenshot-2.png)
+
+3. **ifthenpay Gateway page**  
+   ![ifthenpay Gateway Page](.wordpress-org/screenshot-3.png)
+
+4. **Update Card for Lapsed Recurrent Subscription**  
+   ![Update Card for Lapsed Subscription](.wordpress-org/screenshot-4.png)
+
+5. **Update Card for an Active Reccurrent Subscription (buying the next period)**  
+   ![Update Card for Active Subscription](.wordpress-org/screenshot-5.png)
+
+6. **Refund and Cancel consent (Admin only), future periods that will be refunded**  
+   ![Refund and Cancel Consent](.wordpress-org/screenshot-6.png)
 
 ## Changelog
 
 ### 1.0.0
 
-- Initial release: Period Engine, partial refunds, multi-method support, analytics dashboard, secure callbacks, hooks.
+- Initial release: Period Engine, partial refunds, multi-method support, aligned with the analytics dashboard, secure callbacks, hooks.
 
 ## Upgrade Notice
 
@@ -153,8 +195,7 @@ GPLv3. See LICENSE file or <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 ## Support
 
-Use the WordPress.org support forum:
-https://wordpress.org/support/plugin/ifthenpay-payments-for-memberpress/
+For assistance use the [WordPress.org support forum](https://wordpress.org/support/plugin/ifthenpay-payments-for-memberpress/):
 
 Include when opening a ticket:
 
@@ -168,6 +209,7 @@ Pre-checks:
 - Payment method enabled on Gateway Key AND mapped to Integration
 - Running current recommended versions of WordPress, PHP & MemberPress
 
-Commercial helpdesk (optional): https://helpdesk.ifthenpay.com/
+Commercial helpdesk available (no direct email required): [helpdesk.ifthenpay.com](https://helpdesk.ifthenpay.com/)
 
----
+- **ifthenpay support**: [suporte@ifthenpay.com](mailto:suporte@ifthenpay.com)
+- **MemberPress docs**: [MemberPress docs](https://memberpress.com/docs/)

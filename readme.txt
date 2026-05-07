@@ -2,9 +2,9 @@
 Contributors: ifthenpay
 Tags: ifthenpay, memberpress, subscriptions, recurring, refunds
 Requires at least: 6.5
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,8 +50,9 @@ All settings are made in MemberPress and in your ifthenpay Backoffice. The plugi
 1. Install: Upload the plugin zip via Plugins → Add New → Upload, or install from WordPress.org and Activate.
 2. Credentials: Request an ifthenpay Gateway Key for MemberPress and ensure desired payment methods are enabled.
 3. API Token: In Backoffice → Administration → Integrations create a MemberPress integration; copy API Token & Backoffice Key.
-4. Gateway setup: MemberPress → Settings → Payments → Add Gateway → choose "ifthenpay | Payment Gateway"; enter API Token & Backoffice Key; save.
-5. Test: Make a low-value test payment and confirm callback marks the period Paid.
+4. Payment Configuration: After creating the API Token, click the settings button (⚙️ icon) to configure the desired payment accounts and payment behaviour.
+5. Gateway setup: MemberPress → Settings → Payments → Add Gateway → choose "ifthenpay | Payment Gateway"; enter API Token & Backoffice Key; save.
+6. Test: Make a low-value test payment and confirm callback marks the period Paid.
 
 Troubleshooting:
 * Callback not firing / period not advancing: confirm HTTPS reachability + correct registered callback URL.
@@ -125,10 +126,19 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 
 == Changelog ==
 
+= 1.1.0 =
+* Updated expiryDays handling to support null values and improved expiration date computation.
+* Bumped tested up to WordPress 6.9.
+* Added payment configuration step in installation instructions.
+* Added OTP (One-Time Payment) support to payment payload.
+
 = 1.0.0 =
 * Initial release: Period Engine, partial refunds, multi-method support, aligned with the analytics dashboard, secure callbacks, hooks.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Updated expiryDays handling, added OTP support, and bumped WordPress compatibility.
 
 = 1.0.0 =
 Initial release. Review refund defaults and gateway settings before going live.

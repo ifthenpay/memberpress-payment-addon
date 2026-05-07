@@ -63,8 +63,9 @@ All settings are made in MemberPress and in your ifthenpay Backoffice. The plugi
 1. **Install:** Upload the plugin zip via `Plugins → Add New → Upload`, or install from WordPress.org and Activate.
 2. **Credentials:** Request an ifthenpay Gateway Key for MemberPress and ensure desired payment methods are enabled.
 3. **API Token:** In Backoffice → Administration → Integrations create a MemberPress integration; copy API Token & Backoffice Key.
-4. **Gateway setup:** MemberPress → Settings → Payments → Add Gateway → choose "ifthenpay | Payment Gateway"; enter API Token & Backoffice Key; save.
-5. **Test:** Make a low-value test payment and confirm callback marks the period Paid.
+4. **Payment Configuration:** After creating the API Token, click the settings button (⚙️ icon) to configure the desired payment accounts and payment behaviour.
+5. **Gateway setup:** MemberPress → Settings → Payments → Add Gateway → choose "ifthenpay | Payment Gateway"; enter API Token & Backoffice Key; save.
+6. **Test:** Make a low-value test payment and confirm callback marks the period Paid.
 
 ### Troubleshooting
 
@@ -156,22 +157,22 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 
 Below are screenshots demonstrating key features and interfaces of the plugin:
 
-1. **Gateway Settings under MemberPress Payments Settings**  
+1. **Gateway Settings under MemberPress Payments Settings**
    ![Gateway Settings](.wordpress-org/screenshot-1.png)
 
-2. **Checkout example for a basic one time subscription**  
+2. **Checkout example for a basic one time subscription**
    ![Checkout Example](.wordpress-org/screenshot-2.png)
 
-3. **ifthenpay Gateway page**  
+3. **ifthenpay Gateway page**
    ![ifthenpay Gateway Page](.wordpress-org/screenshot-3.png)
 
-4. **Update Card for Lapsed Recurrent Subscription**  
+4. **Update Card for Lapsed Recurrent Subscription**
    ![Update Card for Lapsed Subscription](.wordpress-org/screenshot-4.png)
 
-5. **Update Card for an Active Reccurrent Subscription (buying the next period)**  
+5. **Update Card for an Active Reccurrent Subscription (buying the next period)**
    ![Update Card for Active Subscription](.wordpress-org/screenshot-5.png)
 
-6. **Refund and Cancel consent (Admin only), future periods that will be refunded**  
+6. **Refund and Cancel consent (Admin only), future periods that will be refunded**
    ![Refund and Cancel Consent](.wordpress-org/screenshot-6.png)
 
 ## Support

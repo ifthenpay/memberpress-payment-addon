@@ -1,50 +1,26 @@
-# Copyright (C) 2025 ifthenpay
-# This file is distributed under the GPL v3.
+# Copyright (C) 2026 ifthenpay-payments-for-memberpress
+# This file is distributed under the same license as the GPL V3.
 msgid ""
 msgstr ""
-"Project-Id-Version: ifthenpay | Payments for MemberPress 1.0.0\n"
+"Project-Id-Version: ifthenpay-payments-for-memberpress 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ifthenpay-payments-for-memberpress\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-07-14 13:36:23+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-06T12:46:58+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: ifthenpay-payments-for-memberpress\n"
+"PO-Revision-Date: 2026-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#. Plugin Name of the plugin
-#: ifthenpay-payments-for-memberpress.php
-msgid "ifthenpay | Payments for MemberPress"
-msgstr ""
-
-#. Plugin URI of the plugin
-#: ifthenpay-payments-for-memberpress.php
-msgid "https://github.com/ifthenpay/memberpress-payment-addon"
-msgstr ""
-
-#. Description of the plugin
-#: ifthenpay-payments-for-memberpress.php
-msgid "MemberPress integration for payments with the ifthenpay gateway: accept cards, digital & mobile wallets, local bank transfers and alternative methods—secure one-time payments and recurring (period-based) subscriptions."
-msgstr ""
-
-#. Author of the plugin
-#: ifthenpay-payments-for-memberpress.php
-msgid "ifthenpay"
-msgstr ""
-
-#. Author URI of the plugin
-#: ifthenpay-payments-for-memberpress.php
-msgid "https://ifthenpay.com/"
+#: ifthenpay-payments-for-memberpress.php:53
+msgid "ifthenpay | Payments for MemberPress requires MemberPress to be active."
 msgstr ""
 
 #: src/Ajax/Controller.php:54
 msgid "Missing transaction number."
 msgstr ""
 
-#: src/Ajax/Controller.php:63
-#: src/Ajax/Controller.php:166
+#: src/Ajax/Controller.php:63 src/Ajax/Controller.php:166
 msgid "Transaction mismatch."
 msgstr ""
 
@@ -53,7 +29,6 @@ msgid "The current active period cannot be refunded yet."
 msgstr ""
 
 #: src/Ajax/Controller.php:77
-#, php-format
 msgid "Refunds are not supported for this payment method: %s."
 msgstr ""
 
@@ -73,13 +48,11 @@ msgstr ""
 msgid "Code verified."
 msgstr ""
 
-#: src/Ajax/Controller.php:133
-#: src/Ajax/Controller.php:158
+#: src/Ajax/Controller.php:133 src/Ajax/Controller.php:158
 msgid "Missing transaction number or transaction ID."
 msgstr ""
 
-#: src/Ajax/Controller.php:162
-#: src/Ajax/Controller.php:220
+#: src/Ajax/Controller.php:162 src/Ajax/Controller.php:219
 msgid "Transaction not found."
 msgstr ""
 
@@ -91,36 +64,35 @@ msgstr ""
 msgid "Missing transaction number or amount."
 msgstr ""
 
-#: src/Ajax/Controller.php:204
+#: src/Ajax/Controller.php:203
 msgid "Amount must be numeric."
 msgstr ""
 
-#: src/Ajax/Controller.php:208
+#: src/Ajax/Controller.php:207
 msgid "Amount must be greater than zero."
 msgstr ""
 
-#: src/Ajax/Controller.php:216
+#: src/Ajax/Controller.php:215
 msgid "Missing transaction ID for single refund."
 msgstr ""
 
-#: src/Ajax/Controller.php:224
+#: src/Ajax/Controller.php:223
 msgid "Chosen amount exceeds transaction amount."
 msgstr ""
 
-#: src/Ajax/Controller.php:229
+#: src/Ajax/Controller.php:228
 msgid "Missing cap for mass refund."
 msgstr ""
 
-#: src/Ajax/Controller.php:233
-#: src/Ajax/Controller.php:237
+#: src/Ajax/Controller.php:232 src/Ajax/Controller.php:236
 msgid "Invalid cap value."
 msgstr ""
 
-#: src/Ajax/Controller.php:240
+#: src/Ajax/Controller.php:239
 msgid "Chosen amount exceeds allowed total."
 msgstr ""
 
-#: src/Ajax/Controller.php:262
+#: src/Ajax/Controller.php:261
 msgid "Refund amount stored."
 msgstr ""
 
@@ -153,7 +125,6 @@ msgid "Admin Actions:"
 msgstr ""
 
 #: src/Ajax/Services/RefundMailerService.php:70
-#, php-format
 msgid "Navigate to the requested %s"
 msgstr ""
 
@@ -178,238 +149,360 @@ msgid "This email was generated automatically."
 msgstr ""
 
 #. translators: %d: The number of minutes before the code expires.
+
 #: src/Ajax/Services/RefundMailerService.php:168
-#, php-format
 msgid "This code expires in %d minutes."
 msgstr ""
 
-#: src/Ajax/Services/RefundPermissionService.php:35
+#: src/Ajax/Services/RefundPermissionService.php:37
 msgid "Unauthorized."
 msgstr ""
 
 #. translators: 1: internal transaction ID, 2: gateway description string from profile.
+
 #: src/Api/IfthenpayHelper.php:63
-#, php-format
 msgid "Transaction #%1$s – %2$s"
 msgstr ""
 
 #. translators: %s: internal transaction ID.
+
 #: src/Api/IfthenpayHelper.php:65
-#, php-format
 msgid "Transaction #%s"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:42
+#: src/Gateway/MeprIfthenpayGateway.php:49
 msgid "Pay securely with your preferred method — including cards, MB WAY, Multibanco, Payshop, and more. Fast, safe, and protected by ifthenpay."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:117
+#: src/Gateway/MeprIfthenpayGateway.php:124
 msgid "Backoffice Key"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:125
+#: src/Gateway/MeprIfthenpayGateway.php:132
 msgid "API Token"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:133
+#: src/Gateway/MeprIfthenpayGateway.php:140
 msgid "Webhook URL"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:159
+#: src/Gateway/MeprIfthenpayGateway.php:166
 msgid "Backoffice Key and API Token are required."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:172
+#: src/Gateway/MeprIfthenpayGateway.php:179
 msgid "Invalid MemberPress profile configuration."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:179
+#: src/Gateway/MeprIfthenpayGateway.php:186
 msgid "Failed to activate ifthenpay callback."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:197
-#: src/Gateway/MeprIfthenpayGateway.php:257
-#: src/Gateway/MeprIfthenpayGateway.php:302
+#: src/Gateway/MeprIfthenpayGateway.php:204 src/Gateway/MeprIfthenpayGateway.php:264 src/Gateway/MeprIfthenpayGateway.php:309
 msgid "ifthenpay is not configured. Save Backoffice Key and API Token first."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:200
+#: src/Gateway/MeprIfthenpayGateway.php:207
 msgid "This gateway currently supports one-time payments only."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:203
-#: src/Gateway/MeprIfthenpayGateway.php:260
-#: src/Gateway/MeprIfthenpayGateway.php:305
+#: src/Gateway/MeprIfthenpayGateway.php:210 src/Gateway/MeprIfthenpayGateway.php:267 src/Gateway/MeprIfthenpayGateway.php:312
 msgid "This gateway only supports EUR currency."
 msgstr ""
 
 #. translators: %s is the underlying exception message from ifthenpay API during payment processing.
-#. translators: %s is the underlying exception message from ifthenpay API during subscription creation payment link generation.
-#. translators: %s is the underlying exception message from ifthenpay API during display payment page link generation.
-#. translators: %s is the underlying exception message from ifthenpay API during refund processing.
-#: src/Gateway/MeprIfthenpayGateway.php:234
-#: src/Gateway/MeprIfthenpayGateway.php:291
-#: src/Gateway/MeprIfthenpayGateway.php:336
-#: src/Gateway/MeprIfthenpayGateway.php:947
-#, php-format
+
+#: src/Gateway/MeprIfthenpayGateway.php:241 src/Gateway/MeprIfthenpayGateway.php:298 src/Gateway/MeprIfthenpayGateway.php:343 src/Gateway/MeprIfthenpayGateway.php:955
 msgid "ifthenpay | Payment Gateway: %s"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:352
+#: src/Gateway/MeprIfthenpayGateway.php:359
 msgid "The payment gateway is not configured. Please contact support."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:357
-#: src/Gateway/MeprIfthenpayGateway.php:520
-#: src/Gateway/MeprIfthenpayGateway.php:802
+#: src/Gateway/MeprIfthenpayGateway.php:364 src/Gateway/MeprIfthenpayGateway.php:526 src/Gateway/MeprIfthenpayGateway.php:810
 msgid "Invalid subscription."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:393
+#: src/Gateway/MeprIfthenpayGateway.php:400
 msgid "No time lost"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:399
+#: src/Gateway/MeprIfthenpayGateway.php:406
 msgid "Price / period"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:404
+#: src/Gateway/MeprIfthenpayGateway.php:411 src/Plugin.php:134
 msgid "Starts"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:410
+#: src/Gateway/MeprIfthenpayGateway.php:417
 msgid "(now)"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:415
+#: src/Gateway/MeprIfthenpayGateway.php:422
 msgid "Billing"
 msgstr ""
 
 #. translators: 1: formatted amount, 2: period label like "2 weeks"
-#: src/Gateway/MeprIfthenpayGateway.php:421
-#, php-format
+
+#: src/Gateway/MeprIfthenpayGateway.php:428
 msgid "%1$s charged each %2$s."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:430
+#: src/Gateway/MeprIfthenpayGateway.php:437 src/Plugin.php:135
 msgid "Ends"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:441
+#: src/Gateway/MeprIfthenpayGateway.php:448
 msgid "Pay securely to renew your subscription"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:445
+#: src/Gateway/MeprIfthenpayGateway.php:452
 msgid "Pay securely to renew"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:448
+#: src/Gateway/MeprIfthenpayGateway.php:455
 msgid "After payment you’ll be returned automatically. If not, come back and refresh."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:503
-#: src/Gateway/MeprIfthenpayGateway.php:597
+#: src/Gateway/MeprIfthenpayGateway.php:510 src/Gateway/MeprIfthenpayGateway.php:603
 msgid "Method Not Allowed"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:509
+#: src/Gateway/MeprIfthenpayGateway.php:515
 msgid "Invalid request."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:524
+#: src/Gateway/MeprIfthenpayGateway.php:530
 msgid "Not allowed."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:547
+#: src/Gateway/MeprIfthenpayGateway.php:553
 msgid "No pending transaction to finalize."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:550
+#: src/Gateway/MeprIfthenpayGateway.php:556
 msgid "Gateway not configured."
 msgstr ""
 
 #. translators: %s: The error message returned when creating a payment link fails.
-#: src/Gateway/MeprIfthenpayGateway.php:579
-#, php-format
+
+#: src/Gateway/MeprIfthenpayGateway.php:585
 msgid "Could not create payment link: %s"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:600
+#: src/Gateway/MeprIfthenpayGateway.php:606
 msgid "Unauthorized"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:612
+#: src/Gateway/MeprIfthenpayGateway.php:618
 msgid "Bad Request"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:649
-#: src/Gateway/MeprIfthenpayGateway.php:685
+#: src/Gateway/MeprIfthenpayGateway.php:657 src/Gateway/MeprIfthenpayGateway.php:693
 msgid "Not Found"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:732
-#: src/Gateway/MeprIfthenpayGateway.php:817
+#: src/Gateway/MeprIfthenpayGateway.php:740 src/Gateway/MeprIfthenpayGateway.php:825
 msgid "Payment gateway not configured."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:810
+#: src/Gateway/MeprIfthenpayGateway.php:818
 msgid "Your refund and cancellation request has been sent to the site administrator. Only site administrators may perform mass cancellations via the gateway."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:812
+#: src/Gateway/MeprIfthenpayGateway.php:820
 msgid "Not allowed to cancel this subscription. Only site administrators may perform mass cancellations via the gateway."
 msgstr ""
 
 #. translators: %d: The number of refund errors that occurred during cancellation.
-#: src/Gateway/MeprIfthenpayGateway.php:861
-#, php-format
+
+#: src/Gateway/MeprIfthenpayGateway.php:869
 msgid "Cancellation failed: %d refund error(s) occurred."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:862
+#: src/Gateway/MeprIfthenpayGateway.php:870
 msgid "Details:"
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:866
+#: src/Gateway/MeprIfthenpayGateway.php:874
 msgid "Please retry or contact support if the issue persists."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:918
+#: src/Gateway/MeprIfthenpayGateway.php:926
 msgid "Invalid refund amount."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:937
+#: src/Gateway/MeprIfthenpayGateway.php:945
 msgid "Payment/s could not be refunded."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:939
+#: src/Gateway/MeprIfthenpayGateway.php:947
 msgid "Insufficient funds. The balance is the sum of all available funds that have not yet been transferred to the customer's account, meaning all payments made from 8:00 PM the previous day until the time of the refund."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:941
+#: src/Gateway/MeprIfthenpayGateway.php:949
 msgid "Unexpected refund response."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:961
+#: src/Gateway/MeprIfthenpayGateway.php:969
 msgid "Refund target not found."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:964
+#: src/Gateway/MeprIfthenpayGateway.php:972
 msgid "Transaction is not in a refundable state."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:967
+#: src/Gateway/MeprIfthenpayGateway.php:975
 msgid "Already refunded."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:970
+#: src/Gateway/MeprIfthenpayGateway.php:978
 msgid "Expired transaction."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:974
+#: src/Gateway/MeprIfthenpayGateway.php:982
 msgid "Missing gateway request ID."
 msgstr ""
 
-#: src/Gateway/MeprIfthenpayGateway.php:977
+#: src/Gateway/MeprIfthenpayGateway.php:985
 msgid "Amount mismatch."
 msgstr ""
+
+#: src/Plugin.php:114
+msgid "Refund verification"
+msgstr ""
+
+#: src/Plugin.php:115
+msgid "Please enter the verification code sent to your email"
+msgstr ""
+
+#: src/Plugin.php:116
+msgid "After you successfully submit the code, the refund process will start automatically. To confirm the results, refresh this page to see the updated statuses of the refunded transactions."
+msgstr ""
+
+#: src/Plugin.php:117
+msgid "Confirm"
+msgstr ""
+
+#: src/Plugin.php:118 src/Plugin.php:131 src/Plugin.php:143
+msgid "Cancel"
+msgstr ""
+
+#: src/Plugin.php:119
+msgid "Network error. Please try again."
+msgstr ""
+
+#: src/Plugin.php:120
+msgid "Could not send code"
+msgstr ""
+
+#: src/Plugin.php:121
+msgid "Invalid or expired code"
+msgstr ""
+
+#: src/Plugin.php:122
+msgid "No code entered"
+msgstr ""
+
+#: src/Plugin.php:123
+msgid "Action cancelled."
+msgstr ""
+
+#: src/Plugin.php:124
+msgid "Could not fetch transactions."
+msgstr ""
+
+#: src/Plugin.php:125
+msgid "Could not fetch refund amount."
+msgstr ""
+
+#: src/Plugin.php:126
+msgid "Unknown AJAX route."
+msgstr ""
+
+#: src/Plugin.php:127
+msgid "Refund and Cancel Consent"
+msgstr ""
+
+#: src/Plugin.php:128
+msgid "Please review the remaining transactions that will be affected:"
+msgstr ""
+
+#: src/Plugin.php:129
+msgid "No transactions found."
+msgstr ""
+
+#: src/Plugin.php:130
+msgid "Proceed"
+msgstr ""
+
+#: src/Plugin.php:132
+msgid "ID"
+msgstr ""
+
+#: src/Plugin.php:133
+msgid "Transaction"
+msgstr ""
+
+#: src/Plugin.php:136
+msgid "Amount"
+msgstr ""
+
+#: src/Plugin.php:137
+msgid "Total Refunded:"
+msgstr ""
+
+#: src/Plugin.php:138
+msgid "Select Refund Amount"
+msgstr ""
+
+#: src/Plugin.php:139
+msgid "Enter the amount to refund for this transaction (up to its full amount)."
+msgstr ""
+
+#: src/Plugin.php:140
+msgid "Enter the total amount you wish to refund across the remaining transactions (up to the displayed total)."
+msgstr ""
+
+#: src/Plugin.php:141
+msgid "Refund amount"
+msgstr ""
+
+#: src/Plugin.php:142
+msgid "Set Amount"
+msgstr ""
+
+#: src/Plugin.php:144
+msgid "Please enter a refund amount."
+msgstr ""
+
+#: src/Plugin.php:145
+msgid "Enter a valid positive number."
+msgstr ""
+
+#: src/Plugin.php:146
+msgid "Amount exceeds the allowed maximum."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "ifthenpay | Payments for MemberPress"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/ifthenpay/ifthenpay-payments-for-memberpress"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "MemberPress integration for payments with the ifthenpay gateway: accept cards, digital & mobile wallets, local bank transfers and alternative methods—secure one-time payments and recurring (period-based) subscriptions."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "ifthenpay"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://ifthenpay.com/"
+msgstr ""
+

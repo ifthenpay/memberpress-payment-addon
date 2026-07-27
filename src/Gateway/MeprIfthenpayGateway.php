@@ -638,7 +638,7 @@ class MeprIfthenpayGateway extends MeprBaseRealGateway {
 
 		// Validate pay_method (mtd)
 		$mtd             = sanitize_text_field( $_GET['mtd'] );
-		$allowed_methods = array( 'MB', 'MBWAY', 'PAYSHOP', 'CCARD', 'COFIDIS', 'GOOGLE', 'APPLE' );
+		$allowed_methods = array( 'MB', 'MBWAY', 'PAYSHOP', 'CCARD', 'GOOGLE', 'APPLE' );
 		if ( ! in_array( $mtd, $allowed_methods, true ) && ! is_numeric( $mtd ) ) {
 			return false;
 		}

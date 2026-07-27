@@ -82,7 +82,7 @@ Yes. Future periods are recalculated; current period may optionally prorate (con
 ifthenpay may provide test entities; if unavailable, use a low-value live test. Future roadmap includes an internal simulation mode.
 
 = Which payment methods are supported? =
-Any ifthenpay method attached to the Gateway Key (e.g. Multibanco, MB WAY, Payshop, Cofidis Pay, Pix, Credit Card if provisioned).
+Any ifthenpay method attached to the Gateway Key (e.g. Multibanco, MB WAY, Payshop, Pix, Credit Card if provisioned).
 
 = How secure is the integration? =
 Callbacks are signed; requests are encrypted over HTTPS; data minimized; nonces protect admin forms.

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog recommendations.
 
+## [1.1.1] - 2026-09-01
+
+### Fixed
+- Fixed callback URL query separator in `activate_callback_by_gateway_context()`: always used `&` after the base URL, producing an invalid `urlCb` (e.g. `/whk&ref=...`) that ifthenpay's callback returned as 404. Now uses `?` when the base URL has no query string yet.
+
+### Removed
+- Removed Cofidis Pay references from documentation and the allowed payment-method whitelist (method no longer offered by ifthenpay).
+
 ## [1.1.0] - 2026-05-07
 
 ### Changed

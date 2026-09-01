@@ -4,7 +4,7 @@ Tags: ifthenpay, memberpress, subscriptions, recurring, refunds
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -126,6 +126,10 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed callback URL query separator so activation always registers `?` before the first parameter instead of `&`.
+* Removed Cofidis Pay references from documentation (method no longer offered by ifthenpay).
+
 = 1.1.0 =
 * Updated expiryDays handling to support null values and improved expiration date computation.
 * Bumped tested up to WordPress 6.9.
@@ -136,6 +140,9 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 * Initial release: Period Engine, partial refunds, multi-method support, aligned with the analytics dashboard, secure callbacks, hooks.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Fixes callback URL registration (404 on IPN for sites using pretty permalinks) and removes discontinued Cofidis Pay references.
 
 = 1.1.0 =
 Updated expiryDays handling, added OTP support, and bumped WordPress compatibility.

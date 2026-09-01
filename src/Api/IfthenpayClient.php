@@ -116,11 +116,12 @@ final class IfthenpayClient {
 	public function activate_callback_by_gateway_context( string $gateway_key, string $wbk_url ): bool {
 		$url = self::BASE . '/endpoint/callback/activation/?cms=memberpress';
 
+		$sep = ( strpos( $wbk_url, '?' ) === false ) ? '?' : '&';
 		$payload = array(
 			'apKey' => base64_encode( $gateway_key ),
 			'chave' => $gateway_key,
-			'urlCb' => $wbk_url .
-				'&ref=[ORDER_ID]&apk=[ANTI_PHISHING_KEY]&val=[AMOUNT]&mtd=[PAYMENT_METHOD]&req=[REQUEST_ID]',
+			'urlCb' => $wbk_url . $sep .
+				'ref=[ORDER_ID]&apk=[ANTI_PHISHING_KEY]&val=[AMOUNT]&mtd=[PAYMENT_METHOD]&req=[REQUEST_ID]',
 		);
 
 		$res = $this->decode_or_fail(

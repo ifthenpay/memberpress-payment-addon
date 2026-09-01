@@ -111,7 +111,7 @@ ifthenpay may provide test entities; if unavailable, use a low-value live test. 
 
 <details>
 <summary><strong>Which payment methods are supported?</strong></summary>
-Any ifthenpay method attached to the Gateway Key (e.g. Multibanco, MB WAY, Payshop, Cofidis Pay, Pix, Credit Card if provisioned).
+Any ifthenpay method attached to the Gateway Key (e.g. Multibanco, MB WAY, Payshop, Pix, Credit Card if provisioned).
 </details>
 
 <details>

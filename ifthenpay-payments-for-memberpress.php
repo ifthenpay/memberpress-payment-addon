@@ -4,7 +4,7 @@
  * Plugin Name:         ifthenpay | Payments for MemberPress
  * Plugin URI:          https://github.com/ifthenpay/ifthenpay-payments-for-memberpress
  * Description:         MemberPress integration for payments with the ifthenpay gateway: accept cards, digital & mobile wallets, local bank transfers and alternative methods—secure one-time payments and recurring (period-based) subscriptions.
- * Version:             1.1.1
+ * Version:             1.1.2
  * Requires at least:   6.5
  * Tested up to:        6.9
  * Requires PHP:        7.4
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 /** Single source of truth */
-define( 'IFTP_MP_VERSION', '1.1.1' );
+define( 'IFTP_MP_VERSION', '1.1.2' );
 define( 'IFTP_MP_PLUGIN_NAME', 'ifthenpay-payments-for-memberpress' ); // folder == text-domain
 define( 'IFTP_MP_PATH', WP_PLUGIN_DIR . '/' . IFTP_MP_PLUGIN_NAME );
 define( 'IFTP_MP_URL', plugins_url( '/' . IFTP_MP_PLUGIN_NAME ) );

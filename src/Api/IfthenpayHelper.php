@@ -69,8 +69,8 @@ final class IfthenpayHelper {
 			'selected_method' => (string) $profile['paymentData']['defaultPaymentMethod'],
 			'otp'			  => true,
 			'success_url'     => self::page_url( $opts->thankyou_page_id, array( 'trans_num' => (string) $txn->trans_num ) ),
-			'cancel_url'      => $whk_url . '&status=cancelled&ref=' . (string) $txn->trans_num,
-			'error_url'       => $whk_url . '&status=error&ref=' . (string) $txn->trans_num,
+			'cancel_url'      => self::append_query( $whk_url, 'status=cancelled&ref=' . (string) $txn->trans_num ),
+			'error_url'       => self::append_query( $whk_url, 'status=error&ref=' . (string) $txn->trans_num ),
 		);
 	}
 
@@ -84,6 +84,24 @@ final class IfthenpayHelper {
 	public static function page_url( $page_id, array $args = array() ): string {
 		$url = $page_id ? get_permalink( (int) $page_id ) : home_url( '/' );
 		return ! empty( $args ) ? add_query_arg( $args, $url ) : $url;
+	}
+
+	/**
+	 * Append a query string to a base URL, choosing the correct separator.
+	 *
+	 * Trims trailing "?", "&" and whitespace from the base URL first, so a
+	 * base that already ends with a separator (or is repeatedly appended to)
+	 * doesn't produce a doubled or dangling one. The separator is then chosen
+	 * based on whether the base URL already carries a real query string.
+	 *
+	 * @param string $base  Base URL, with or without an existing query string.
+	 * @param string $query Query string to append (without a leading separator).
+	 * @return string Base URL with $query appended using "?" or "&" as needed.
+	 */
+	public static function append_query( string $base, string $query ): string {
+		$base = rtrim( $base, "?& \t\n\r\0\x0B" );
+		$sep  = wp_parse_url( $base, PHP_URL_QUERY ) ? '&' : '?';
+		return $base . $sep . $query;
 	}
 
 	/**

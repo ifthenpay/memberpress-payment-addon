@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format loosely follows Keep a Changelog recommendations.
 
+## [1.1.2] - 2026-09-02
+
+### Fixed
+- Fixed the second occurrence of the 1.1.1 callback/redirect URL separator bug: `IfthenpayHelper::build_pay_by_link_payload()` still built `cancel_url`/`error_url` with `$whk_url . '&status=...'`, always opening with `&` instead of `?` when the base URL had no query string yet.
+
+### Changed
+- Extracted the query-separator logic into a single shared helper, `IfthenpayHelper::append_query()`, used by both `IfthenpayClient::activate_callback_by_gateway_context()` and `IfthenpayHelper::build_pay_by_link_payload()`, so the two code paths can no longer drift out of sync.
+
 ## [1.1.1] - 2026-09-01
 
 ### Fixed

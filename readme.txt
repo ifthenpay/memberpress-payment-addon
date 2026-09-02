@@ -4,7 +4,7 @@ Tags: ifthenpay, memberpress, subscriptions, recurring, refunds
 Requires at least: 6.5
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -126,6 +126,10 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 
 == Changelog ==
 
+= 1.1.2 =
+* Fixed the same callback URL query separator bug from 1.1.1 in the pay-by-link cancel/error redirect URLs, which still opened with `&` instead of `?`.
+* Consolidated the query separator logic into a single shared helper (`IfthenpayHelper::append_query()`) used everywhere a callback/redirect URL is built, so the two code paths can no longer drift out of sync.
+
 = 1.1.1 =
 * Fixed callback URL query separator so activation always registers `?` before the first parameter instead of `&`.
 * Removed Cofidis Pay references from documentation (method no longer offered by ifthenpay).
@@ -140,6 +144,9 @@ All network requests are performed server-side over HTTPS. Sensitive credentials
 * Initial release: Period Engine, partial refunds, multi-method support, aligned with the analytics dashboard, secure callbacks, hooks.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Fixes a second callback/redirect URL registration bug left over from 1.1.1 (pay-by-link cancel/error URLs). Recommended for all sites running 1.1.1.
 
 = 1.1.1 =
 Fixes callback URL registration (404 on IPN for sites using pretty permalinks) and removes discontinued Cofidis Pay references.
